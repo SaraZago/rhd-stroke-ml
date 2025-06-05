@@ -1,0 +1,69 @@
+# -----------------------------------------------------------------------------
+# Toy config for coco_pipe MLPipeline
+# -----------------------------------------------------------------------------
+
+# A unique identifier for this entire experiment
+global_experiment_id: "fs_PATHS_ML"
+
+# Path to your input CSV/Parquet/etc.  
+data_path: "/Users/Altair93/Documents/Dottorato/PATHS/Python_analisys/Intermediate_data/ML/Analysis_ver3.csv"
+
+# Where to write all the per‐analysis and final results
+results_dir: "/Users/Altair93/Documents/Dottorato/PATHS/Python_analisys/Intermediate_data/ML/Results"
+
+# Base filename (without extension) for per‐analysis outputs
+results_file: "delta_barthel" #"delta_barthel", "delta_fim", "effectiveness"
+
+# -----------------------------------------------------------------------------
+# Defaults: values here are applied to every analysis unless overridden
+# -----------------------------------------------------------------------------
+defaults:
+  # Random seed for reproducibility
+  random_state: 42
+
+  # Number of parallel jobs (−1 = all cores)
+  n_jobs: -1
+
+  # Cross‐validation settings; any can be overridden per‐analysis
+  cv_kwargs:
+    cv_strategy: "kfold"    # Options: "kfold", "stratified", "group", etc.
+    n_splits: 5                  # Number of folds
+    shuffle: true                # Whether to shuffle before splitting
+    random_state: 42             # Seed for the splitter
+
+  # Always‐include covariates (by column name) for all analyses
+  covariates:  ['criq', 'mmse', 'trog', 'reyfig', 'reyword', 'phonemic', 'semantic', 'denomdescr', 'span_for', 'span_back'] 
+
+  # If you want to do group‐ or spatial‐CV, list your grouping columns here
+  spatial_units: ["FL", "FR", "CL", "CR", "TR", "TL", "PR", "PL", "OL", "OR"]
+
+  # By default include all features; you can also set a list of column names
+  feature_names: ["offset", "exponent", "lziv", "higuci", "theta", "delta"]
+
+
+# -----------------------------------------------------------------------------
+# Analyses to run: each entry here produces one folder/file in results_dir
+# -----------------------------------------------------------------------------
+analyses:
+
+    # 6) Regression + Feature Selection
+  - id: "regression_feature_selection"
+    task: "regression"
+    mode: "multivariate" # can also be univariate in case of single target columns (i.e single channel analysis)
+    analysis_type: "feature_selection"
+    target_columns: ["delta_barthel"] #"delta_barthel", "delta_fim", "effectiveness"
+    
+
+
+    models:
+      - "Random Forest"
+
+    metrics:
+      - "r2"
+
+    # FS params
+    n_features: 10
+    direction: "forward"
+    scoring: "r2"
+    threshold: 0
+
