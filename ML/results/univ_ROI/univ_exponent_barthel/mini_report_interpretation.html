@@ -1,0 +1,152 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><title>CV Report</title>
+<style>body{font-family:Arial,Helvetica,sans-serif;max-width:980px;margin:2rem auto;line-height:1.5} h1,h2{margin-top:1.6rem} table{border-collapse:collapse;width:100%;} th,td{border:1px solid #ddd;padding:6px} img{max-width:100%;height:auto;margin:10px 0}</style>
+</head><body>
+<h1>Cross-Validation Results: Automatic Report and Interpretation</h1>
+<h2>Metrics by Fold</h2>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Fold</th>
+      <th>R2</th>
+      <th>MSE</th>
+      <th>RMSE</th>
+      <th>MAE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>-0.564800</td>
+      <td>1189.567143</td>
+      <td>34.490102</td>
+      <td>27.457143</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.525024</td>
+      <td>101.592083</td>
+      <td>10.079290</td>
+      <td>6.508333</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>-3.297131</td>
+      <td>417.776667</td>
+      <td>20.439586</td>
+      <td>18.566667</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>-1.342204</td>
+      <td>234.220417</td>
+      <td>15.304261</td>
+      <td>12.958333</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>0.059113</td>
+      <td>760.550417</td>
+      <td>27.578079</td>
+      <td>23.991667</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Feature Importance (mean ± std)</h2>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>feature</th>
+      <th>mean_importance</th>
+      <th>std_importance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>PR</td>
+      <td>0.173246</td>
+      <td>0.047767</td>
+    </tr>
+    <tr>
+      <td>TR</td>
+      <td>0.153146</td>
+      <td>0.041798</td>
+    </tr>
+    <tr>
+      <td>OL</td>
+      <td>0.105496</td>
+      <td>0.031999</td>
+    </tr>
+    <tr>
+      <td>CL</td>
+      <td>0.101965</td>
+      <td>0.021325</td>
+    </tr>
+    <tr>
+      <td>OR</td>
+      <td>0.101512</td>
+      <td>0.014865</td>
+    </tr>
+    <tr>
+      <td>PL</td>
+      <td>0.077729</td>
+      <td>0.023494</td>
+    </tr>
+    <tr>
+      <td>FL</td>
+      <td>0.077360</td>
+      <td>0.039986</td>
+    </tr>
+    <tr>
+      <td>TL</td>
+      <td>0.076012</td>
+      <td>0.019201</td>
+    </tr>
+    <tr>
+      <td>CR</td>
+      <td>0.071634</td>
+      <td>0.007660</td>
+    </tr>
+    <tr>
+      <td>FR</td>
+      <td>0.061900</td>
+      <td>0.029867</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Main Plots</h2>
+<h3>feature_importances_mean_std.png</h3><img src='feature_importances_mean_std.png' alt='feature_importances_mean_std.png'>
+<h3>feature_importances_correlation_heatmap.png</h3><img src='feature_importances_correlation_heatmap.png' alt='feature_importances_correlation_heatmap.png'>
+<h3>best_fold_2_feature_importances.png</h3><img src='best_fold_2_feature_importances.png' alt='best_fold_2_feature_importances.png'>
+<h2>True vs Predicted Scatter Plots (by fold)</h2>
+<img src='fold_1_true_vs_pred.png' alt='fold_1_true_vs_pred.png'>
+<img src='fold_2_true_vs_pred.png' alt='fold_2_true_vs_pred.png'>
+<img src='fold_3_true_vs_pred.png' alt='fold_3_true_vs_pred.png'>
+<img src='fold_4_true_vs_pred.png' alt='fold_4_true_vs_pred.png'>
+<img src='fold_5_true_vs_pred.png' alt='fold_5_true_vs_pred.png'>
+<h2>Residual Plots (by fold)</h2>
+<img src='fold_1_residuals.png' alt='fold_1_residuals.png'>
+<img src='fold_2_residuals.png' alt='fold_2_residuals.png'>
+<img src='fold_3_residuals.png' alt='fold_3_residuals.png'>
+<img src='fold_4_residuals.png' alt='fold_4_residuals.png'>
+<img src='fold_5_residuals.png' alt='fold_5_residuals.png'>
+<h2>Automatic Interpretation</h2>
+<pre>Overall Performance
+- Mean R² across folds: -0.924 (± 1.500).
+- Average error: RMSE = 21.578, MAE = 17.896 (same unit as target variable).
+
+Model Stability
+- R² variability across folds is high (std = 1.500).
+- Average feature importance stability across folds: 0.028 (lower = more stable).
+
+Most Important Features (average across all folds)
+- Top-3: PR (0.173), TR (0.153), OL (0.105).
+
+Best Fold
+- Best fold: 2 with R² = 0.525.
+- In the best fold, the most important features are: PR (0.187), TR (0.147), OL (0.098).
+
+Residual Analysis (best fold)
+- Residuals–predictions correlation: 0.158 (0 ≈ absence of linear bias).
+- |Residuals|–predictions correlation: -0.256 (positive values indicate possible heteroscedasticity).
+- Outliers (|res| > 3·std): 0.</pre>
+</body></html>
