@@ -3,16 +3,16 @@
 # -----------------------------------------------------------------------------
 
 # A unique identifier for this entire experiment
-global_experiment_id: "uni_PATHS_ML"
+global_experiment_id: "univ_NPSI_target"
 
 # Path to your input CSV/Parquet/etc.  
-data_path: "/Users/Altair93/Documents/Dottorato/PATHS/Python_analisys/Intermediate_data/ML/Analysis_ver3.csv"
+data_path: "/Users/Altair93/Documents/Dottorato/PATHS/Python_analisys/Intermediate_data/ML/Effectiveness_clean.csv"
 
 # Where to write all the per‐analysis and final results
-results_dir: "/Users/Altair93/Documents/Dottorato/PATHS/Python_analisys/Results"
+results_dir: "/Users/Altair93/Documents/Dottorato/PATHS/Python_analisys/Results/ML/data/univariate"
 
 # Base filename (without extension) for per‐analysis outputs
-results_file: "univ_NPSI_delta_barthel" #"delta_barthel", "delta_fim", "effectiveness"
+results_file: "univ_NPSI_effectiveness" #"delta_barthel", "delta_fim", "effectiveness"
 
 # -----------------------------------------------------------------------------
 # Defaults: values here are applied to every analysis unless overridden
@@ -51,7 +51,7 @@ analyses:
     task: "regression"
     mode: "univariate"          # for regression, if y has multiple columns you can also do univariate
     analysis_type: "baseline"
-    target_columns: ["delta_barthel"] #"delta_barthel", "delta_fim", "effectiveness"
+    target_columns: ["effectiveness"] #"delta_barthel", "delta_fim", "effectiveness"
 
     models:
       - "Random Forest"
